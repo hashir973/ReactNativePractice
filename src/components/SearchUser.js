@@ -79,8 +79,6 @@ const SearchUser = () => {
         </View>
         
 
-        
-        {/* <Text>{singleUser?.title} </Text>  */}
         {!singleUser ?
           users.map((item, index) => {
           return (
@@ -212,3 +210,23 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// var urlRegex = /^http[s]?:\/\/.*?\/([a-zA-Z-_]+).*$/;
+// var input = 'http://stackoverflow.com/questions/31760030/extracting-for-url-from-string-using-regex' // <--- some string;
+// var url = input.match(urlRegex);

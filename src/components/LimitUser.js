@@ -3,21 +3,25 @@ import {
   Text,
   StyleSheet,
   TextInput,
+  ScrollView,
   TouchableOpacity,
+  FlatList,
+  Alert,
+  alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import {windowHeight, windowWidth} from '../constant/Dimensions';
 import axios from 'axios';
+import LimitCard from './LimitCard';
 
 const LimitUser = () => {
+  const [limit, setLimit] = useState([]);
   const [searchLimit, setSearchLimit] = useState({
     IDLimits: 0,
     pagePerLimits: 0,
   });
 
-  
-
-
+  console.log('CHECK', limit);
 
   const applyLimits = () => {
     axios
@@ -25,7 +29,8 @@ const LimitUser = () => {
         `https://jsonplaceholder.typicode.com/photos?_page=${searchLimit.IDLimits}&_limit=${searchLimit.pagePerLimits}`,
       )
       .then(res => {
-        console.log('RES', res);
+        // console.log('RES', res);
+        setLimit(res?.data);
       })
       .catch(error => {
         console.log('ERROR', error);
@@ -37,7 +42,7 @@ const LimitUser = () => {
       <View style={styles.text_input}>
         <TextInput
           onChangeText={text => {
-            setSearchLimit({IDLimits: text})
+            setSearchLimit({IDLimits: text});
           }}
           placeholder="Enter ID..."
           placeholderTextColor="#2BB789"
@@ -51,7 +56,7 @@ const LimitUser = () => {
       <View style={styles.text_input}>
         <TextInput
           onChangeText={text => {
-            setSearchLimit({pagePerLimits:text})
+            setSearchLimit({pagePerLimits: text});
           }}
           placeholder="Enter Limit..."
           placeholderTextColor="#2BB789"
@@ -63,7 +68,14 @@ const LimitUser = () => {
       </View>
 
       <TouchableOpacity
-        onPress={applyLimits}
+        onPress={() => {
+          if (searchLimit.IDLimits==0 || searchLimit.pagePerLimits == 0) {
+           return  Alert.alert("SOME THING IS MISSING!")
+          }
+          else{
+            applyLimits()
+          }
+        }}
         style={{alignItems: 'center', margin: 20}}>
         <Text
           style={{
@@ -82,6 +94,29 @@ const LimitUser = () => {
         </Text>
       </TouchableOpacity>
 
+      <View scrollEnabled={true}>
+        <FlatList
+          scrollEnabled={true}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={limit}
+          keyExtractor={item => item.id}
+          initialNumToRender={limit.length}
+          renderItem={({item}) => {
+            //   console.log('item', item);
+            return (
+              <>
+                <LimitCard
+                  linkurl={item.url}
+                  id={item.id}
+                  albumId={item.albumId}
+                  title={item.title}
+                />
+              </>
+            );
+          }}
+        />
+      </View>
     </View>
   );
 };

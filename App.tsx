@@ -14,6 +14,7 @@ import Users from './src/screens/UserApp/Users';
 import SearchUser from './src/components/SearchUser';
 import UsersList from './src/components/UsersList';
 import Post from './src/screens/PostApiWork/Post';
+import LimitCard from './src/components/LimitCard';
 
 
 
