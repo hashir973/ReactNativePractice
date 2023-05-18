@@ -2,7 +2,7 @@ import {View, Text, ImageBackground} from 'react-native';
 import React from 'react';
 import {windowHeight, windowWidth} from '../constant/Dimensions';
 
-const LimitCard = ({url,linkurl,title,id,albumId}) => {
+const LimitCard = ({linkurl, title, id, albumId}) => {
   return (
     <View>
       <View
@@ -20,8 +20,16 @@ const LimitCard = ({url,linkurl,title,id,albumId}) => {
               borderBottomLeftRadius: 20,
               borderColor: '#2BB789',
               borderWidth: 1,
+              shadow: {
+                shadowColor: 'grey',
+                shadowOpacity: 5,
+                shadowOffset: {
+                  width: windowWidth * 0.9,
+                  height: windowHeight * 0.3,
+                },
+                elevation: 3,
+              },
             }}>
-
             <ImageBackground
               source={{uri: linkurl}}
               resizeMode="cover"
@@ -30,24 +38,13 @@ const LimitCard = ({url,linkurl,title,id,albumId}) => {
                 width: windowWidth * 0.9,
                 height: windowHeight * 0.22,
                 backgroundColor: 'grey',
-                //   shadow: {
-                //     shadowColor: '#000',
-                //     shadowOpacity: 25,
-                //     shadowOffset: {
-                //       width: 80,
-                //       height: 10,
-                //     },
-                //     elevation: 50,
-                //   },
               }}>
-
               <View
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
                   padding: 10,
                 }}>
-
                 <Text
                   style={{
                     fontSize: 18,
@@ -59,7 +56,6 @@ const LimitCard = ({url,linkurl,title,id,albumId}) => {
                 </Text>
 
                 <View style={{paddingRight: 20}}>
-
                   <Text
                     style={{
                       fontSize: 16,
@@ -70,7 +66,6 @@ const LimitCard = ({url,linkurl,title,id,albumId}) => {
                     <Text style={{color: '#000', fontSize: 18}}>Album ID:</Text>{' '}
                     {albumId}
                   </Text>
-
                 </View>
               </View>
             </ImageBackground>
